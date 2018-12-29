@@ -43,10 +43,10 @@ def twitter_to(name):
 #                   Initialize API
 # =============================================================================
 
-ACCESS_TOKEN = '1003717913042477056-962Vd7YOhafqeup9E6FaJnMaSJHdP2'
-ACCESS_SECRET = 'XxHRy6SJlCC2MWMjsrDUq3p7THfwFP5U78auchHbFyDNd'
-CONSUMER_KEY = '2ffc0OGPmWHCYzw7pCrNqEzWO'
-CONSUMER_SECRET = 'djNGjFJA9xP0ZFEkCNAQcSAfCMgjxugZF7HXIA2KmPCiKv6E4k'
+ACCESS_TOKEN = 'PRIVATE'
+ACCESS_SECRET = 'PRIVATE'
+CONSUMER_KEY = 'PRIVATE'
+CONSUMER_SECRET = 'PRIVATE'
 
 auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 auth.set_access_token(ACCESS_TOKEN, ACCESS_SECRET)
@@ -59,6 +59,7 @@ api = tweepy.API(auth,wait_on_rate_limit=True)
     
 df_tweetsAuthor = pd.DataFrame([],columns = ["id_tweet","tweetSource","Author","fecha"])
 
+# Some ARG influencers...
 influencers = ['DementeYT','vikypita', 'natijota', 'laufer4', 'martinciriook', 'malepichot', 'solperez', 'Pedrito_Vm']
 
 influencers = ['Pedrito_Vm']
@@ -112,5 +113,5 @@ for i in range(chunk):
 UserData = pd.DataFrame([{'user_name':x.screen_name, 'followers':x.followers_count,'n_tweets':x.statuses_count,
   'likes':x.favourites_count,'friends':x.friends_count,'description':x.description,'id':x.id} for x in user_fullData])
 
-UserData.to_excel("SpriteFollowers.xlsx")
+UserData.to_excel("FollowersData.xlsx")
     
