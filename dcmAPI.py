@@ -20,7 +20,7 @@ import json
 import os
 # ojo!! Hay que estar logeado con analytics.stacommedia@gmail.com
 # Hay que bajarse un json con los keys desde la pagina de la API
-cred = "client_secret_592284814075-5aas058tahf5tr1jti75o8p6me03mjfq.apps.googleusercontent.com.json"
+cred = "client_secret.json"
 app_name = 'my_app'   #nombre del .dat 
 
 # con esto cargo las credenciales o me creo el .dat en caso que no exista
@@ -127,100 +127,3 @@ for ind,line in creativesID.iterrows():
         else:
             pd.DataFrame([{"creativeId":id_,"status":"No existe creativeAssets"}]).to_csv(   # logeo error
                      "StatusDownload.csv",mode = 'a', header = None,sep = ';',index = False) 
-
-#
-#import pdfkit
-#path_wkthmltopdf = 'C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe'  # hay que instalarlo!!
-#config = pdfkit.configuration(wkhtmltopdf=path_wkthmltopdf)
-#pdfkit.from_url('https://s0.2mdn.net/5129510/1479848560882/index.html', 'out.pdf', configuration=config)
-#
-## pdf to gif python PythonMagick!!!!
-## https://glenbambrick.com/2017/01/10/pdf-to-jpg-conversion-with-python-for-windows/
-#import wand
-#img = wand.image.Image(filename="1532101316185.pdf")
-#img.save(filename="d:\\temp.jpg")
-#
-#
-#from urllib.request import urlopen
-#from bs4 import BeautifulSoup
-#import re
-#
-#html = urlopen('https://s0.2mdn.net/5129510/1479848560882/index.html')
-#bs = BeautifulSoup(html, 'html.parser')
-#images = bs.find_all('img', {'src':re.compile('(.jpg)|(.png)')})
-#for image in images: 
-#    print(image['src']+'\n')
-
-
-#import urllib
-#import requests
-#
-#userprofiles = str(4014971)
-#id_ = str(92451698)
-#
-#requests.get('https://www.googleapis.com/dfareporting/v3.2/'+userprofiles+'/profileId/creatives/'+id_,
-#             headers={'Authorization':credentials.access_token} )
-#http.request('https://www.googleapis.com/dfareporting/v3.2/userprofiles/'+userprofiles+'/creatives/'+id_)
-#https://www.googleapis.com/dfareporting/v3.2/userprofiles/profileId/creatives/id
-#
-#report_file = service.files().get(
-#    creativeId=id_, profileId=userprofiles).execute()
-#
-#request = service.creatives().list(
-#        profileId=4014971, active=True, advertiserId=6994849)
-#
-#while True:
-#  # Execute request and print response.
-#  response = request.execute()
-#
-#  for creative in response['creatives']:
-#    print ('Found %s creative with ID %s and name "%s".'
-#           % (creative['type'], creative['id'], creative['name']))
-#
-#  if response['creatives'] and response['nextPageToken']:
-#    request = service.creatives().list_next(request, response)
-#  else:
-#    break
-    
-    
-from imageai.Detection import ObjectDetection    
-import os    
-
-execution_path = os.getcwd()
-
-detector = ObjectDetection()
-detector.setModelTypeAsRetinaNet()
-detector.setModelPath( os.path.join(execution_path , "resnet50_coco_best_v2.0.1.h5"))
-detector.loadModel()
-#detections = detector.detectObjectsFromImage(input_image=os.path.join(execution_path , "75389796.PNG"), output_image_path=os.path.join(execution_path , "imagenew.jpg"))
-#
-#object_ = detections[0]
-#ubicacion = object_["box_points"]
-#
-#for eachObject in detections:
-#    print(eachObject["name"] , " : " , eachObject["percentage_probability"] )
-
-detector = ObjectDetection()
-detector.setModelTypeAsRetinaNet()
-detector.setModelPath( os.path.join(execution_path , "resnet50_coco_best_v2.0.1.h5"))
-detector.loadModel()
-
-files  = os.listdir(fileIn) 
-
-image_labels = pd.DataFrame([],columns = ['box_points', 'name', 'percentage_probability', 'file'])
-for file_name in files:
-    detections = detector.detectObjectsFromImage(input_image=os.path.join( fileIn, file_name),output_type = "array")[1]
-    aux = pd.DataFrame(detections)
-    aux["file"] = file_name
-    image_labels = image_labels.append(aux,ignore_index = True)
-    print(file_name)
-
-image_labels["img_code"] = image_labels["file"].apply(lambda x: x.split('.')[0])
-
-import ast
-import re
-image_labels.to_csv("Object_Detection.csv",sep = ";")
-asd = pd.read_csv("Object_Detection.csv",sep = ";")   
-asd["object_pos"] = asd["box_points"].apply(lambda x:ast.literal_eval(re.sub('(\[,)|(,\])','[',re.sub(r'\s+',',',x ))) )
-
-
