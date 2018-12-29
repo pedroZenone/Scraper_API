@@ -3,12 +3,14 @@
 """
 Created on Wed Dec 12 13:26:47 2018
 
+This is the master program that is watching and runing the twitter scrapper. Just give a csv file with screen_name users 
+and master will get the whole tweets.
+
 Use mode: python MaterTweet.py <port number> -u <csv file column 0>(use ) or python MaterTweet.py <port number>      or..   python MasterTweet.py   and by default port num will be 9904
 
 @author: pedzenon
 """
 
-from NLP_preproc import NLP_preproc
 import os
 import pandas as pd
 import joblib
@@ -48,48 +50,6 @@ def main(argv):
     
     j = 2
   
-    
-# =============================================================================
-#     Cargo el modelo, levanto a todos los usuarios y me armo una lista de haters
-# =============================================================================
-        
-#    fileDir = os.path.dirname(os.path.realpath('__file__'))
-#    fileModel = os.path.join(fileDir,"model")
-#              
-#    # Levanto los datos
-#    
-#    data = pd.read_excel("./data/MoreInfluencersAzu.xlsx")
-#    
-#    # Preproc text
-#    
-#    data.columns = ["Full Text" if (x == "text") else x for x in data.columns]
-#    data["Full Text"] = data["Full Text"].astype(str)
-#    prepoc = NLP_preproc(data)
-#    prepoc.preprocessing(True)
-#    
-#    single_words = [x for x in 'abcdefghijklmnopqrstuvwxyz'] 
-#    prepoc.update_StopWords(single_words + ['pedro','pedrito','sol','perez','flor','gime','jimena','jime','bimbo','angela'])
-#    
-#    data["Text"] = prepoc.get_procTextTweets()
-#    data = data.loc[data["Text"] != '']
-#    
-#    # cargo modelo
-#    model = joblib.load(os.path.join(fileModel,'model.pkl'))
-#     
-#    optimal_tresh = 0.302
-#    cutter = np.vectorize(lambda x: 1 if x > optimal_tresh else 0)
-#    data["hater"] = cutter(model.predict_proba(data["Text"])[:,1])
-#    
-#    bardeos = data.loc[data["hater"] == 1]
-#    haters = list(set(bardeos["author"]))
-#
-#    fileHaters = os.path.join(os.path.join(fileDir,"data"),"haters_scrap")
-#    #fileHaters = os.path.join(os.path.join(fileDir,"data"),"other_influencers")
-#    
-#    # Saco los que ya estan!
-#    allready_haters = os.listdir(fileHaters)
-#    haters = [x for x in haters if(x + ".xlsx" not in allready_haters)]
-#  
     
     fileDir = os.path.dirname(os.path.realpath('__file__'))
     fileHaters = os.path.join(os.path.join(fileDir,"data"),"sprite_users")
