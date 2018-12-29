@@ -26,7 +26,7 @@ while d <= end_date:    # Recorro el calendario
     date_ = d.strftime("%Y-%m-%d")
     d += delta 
     # Accedo a la API y me traigo la data por día
-    url = 'http://clientela.admetricks.com/o/token/?grant_type=password&username=emily.degennaro@starcommedia.com.ar&password=Analytics.2018&client_id=IW8M80h7qgCaSz4hPm3gr3wJP89NiJTPyhkwPurT&client_secret=KnBW84uyHlxwlNrKOXyym6Ro1IT6IlYdhScdop63hHddCzJIxUwDG7VItNgEONb1U2ebEH6fBmkYgX9LrZD4uqFJlYscHYn9MLxOm2qVccNE2WGEuePpKA7t3jQ2CvMu'
+    url = 'http://clientela.admetricks.com/o/token/?grant_type=password&username=USER_NAME&password=PASSWORD&client_id=IW8M80h7qgCaSz4hPm3gr3wJP89NiJTPyhkwPurT&client_secret=KnBW84uyHlxwlNrKOXyym6Ro1IT6IlYdhScdop63hHddCzJIxUwDG7VItNgEONb1U2ebEH6fBmkYgX9LrZD4uqFJlYscHYn9MLxOm2qVccNE2WGEuePpKA7t3jQ2CvMu'
     conn  = requests.post(url)
     
     if(conn.status_code == 200 ):
@@ -53,47 +53,3 @@ while d <= end_date:    # Recorro el calendario
         
     else:
         print("-------- Error en dia: ",date_)
-
-
-
-
-##############################################################
-# Siempre tiene 29 campos la data!
-aux = []
-
-for x in data["data"]:
-    aux.append(len(x.keys()))
-#############################################################
-    
-# Esta funciona:
-curl -X POST -H "Authorization:Bearer jWMd7bJSXH7A9ZHqrgDumnIUfW4LFU" "http://clientela.admetricks.com/market-report/data/?day=2016-03-01&country=1&device=1&ad_type=1"
-
-##########################################################################################################
-##########################################################################################################
-
-import pandas as pd
-import pyodbc
-
-server = 'sql1.publicisone-latam.com,1189'
-db = 'KO_SLBU_Competitive'
-
-conn = pyodbc.connect('DRIVER={SQL Server};SERVER=' + server + ';DATABASE=' + db + ';UID=arOwner;PWD=wraJU6huw-AN')
-
-conn2 = pyodbc.connect(driver = )
-sql = """
-
-SELECT * FROM BaseNorm
-
-"""
-df = pd.read_sql(sql, conn)
-
-##########################################################################################################
-##########################################################################################################
-
-start_date = date(2013, 1, 1)
-end_date = date(2015, 6, 2)
-d = start_date
-delta = datetime.timedelta(days=1)
-while d <= end_date:
-    print d.strftime("%Y-%m-%d")
-    d += delta
