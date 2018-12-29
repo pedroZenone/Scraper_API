@@ -1,4 +1,4 @@
-# Scraper_API
+# Scraper API
 
 Here are some bots and API connections to get data.
 
