@@ -3,13 +3,13 @@
 """
 Created on Wed Dec 12 14:17:00 2018
 
-Programa que le pasas por argumento el hater a escrapear y puerto donde comunicarse con el master.
-Este programa es ejecutado por el master (MasterTweet.py). 
+Slave program. Just pass as argument the hater name to scrap and port to communicate via socket with the master.
+This program is executed by master (MasterTweet.py). 
 
 @author: Pedro Zenone
 """
 
-import got3 as got
+import got3 as got # This library is tuned. I added a parameter in methods for changing user-agent and I also fixed some bugs
 import time
 import sys
 import os
