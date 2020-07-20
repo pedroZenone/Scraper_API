@@ -3,8 +3,8 @@
 """
 Created on Wed Dec 12 14:17:00 2018
 
-Slave program. Just pass as argument the hater name to scrap and port to communicate via socket with the master.
-This program is executed by master (MasterTweet.py). 
+Subordinate program. Just pass as argument the hater name to scrap and port to communicate via socket with the main.
+This program is executed by main (MainTweet.py). 
 
 @author: Pedro Zenone
 """
@@ -26,7 +26,7 @@ def tweeter_scrap(argv):
     
     hater = argv[0]
     
-    # cargo el useragent que me pasa el master
+    # cargo el useragent que me pasa el main
     ua = argv[2]
 
     print("llego ",ua)
@@ -35,7 +35,7 @@ def tweeter_scrap(argv):
     fileHaters = os.path.join(os.path.join(fileDir,"data"),"sprite_users")
     #fileHaters = os.path.join(os.path.join(fileDir,"data"),"other_influencers")
     
-    print("Starting slave")
+    print("Starting subordinate")
 
     try: # scrap historical tweeter data and download excel
         tweetCriteria = got.manager.TweetCriteria().setQuerySearch('to:' + hater + ' since:2018-05-01').setMaxTweets(1000)
@@ -51,7 +51,7 @@ def tweeter_scrap(argv):
         print("Error en twitter API   ",hater)
         
     
-    print('Finish slave')
+    print('Finish subordinate')
     s.send('finish'.encode('utf-8'))
     exit(0)  # cierro todo
             
