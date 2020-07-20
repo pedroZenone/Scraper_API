@@ -3,10 +3,10 @@
 """
 Created on Wed Dec 12 13:26:47 2018
 
-This is the master program that is watching and runing the twitter scrapper. Just give a csv file with screen_name users 
-and master will get the whole tweets.
+This is the main program that is watching and runing the twitter scrapper. Just give a csv file with screen_name users 
+and main will get the whole tweets.
 
-Use mode: python MaterTweet.py <port number> -u <csv file column 0>(use ) or python MaterTweet.py <port number>      or..   python MasterTweet.py   and by default port num will be 9904
+Use mode: python MaterTweet.py <port number> -u <csv file column 0>(use ) or python MaterTweet.py <port number>      or..   python MainTweet.py   and by default port num will be 9904
 
 @author: pedzenon
 """
